@@ -5,9 +5,9 @@ services:
     image: jetbrains-gateway-ssh
     build: src
     environment:
-      SSH_USERNAME: "${SSH_USERNAME:-jetbrains}"
-      SSH_PASSWORD: "${SSH_PASSWORD:-jetbrains}"
-    volumes:
-      - "./home:/opt/home"
+      SSH_USERNAME: "${SSH_USERNAME:-kubot}"
+      SSH_PASSWORD: "${SSH_PASSWORD:-kubot}"
+    # volumes:
+    #   - "./share:/home/kubot/share"
     ports:
       - "${SSH_PORT:-22}:22"
