@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 ADD startup.sh /startup.sh
 ADD sources.list /etc/apt
-ADD ssh /home/kubot/.ssh
-RUN ["chmod", "0600", "/home/kubot/.ssh/*"]
 
 RUN groupadd -r kubot && useradd -r -g kubot kubot
 
@@ -29,6 +27,14 @@ RUN apt-get update && apt-get upgrade -y && \
 
 VOLUME [ "/home/kubot" ]
 WORKDIR /home/kubot
+
+ADD kubot_toolchain_bryan202208.7z .
+
+COPY ssh/ /home/kubot/.ssh
+RUN ["chmod", "0600", "/home/kubot/.ssh/config"]
+RUN ["chmod", "0600", "/home/kubot/.ssh/id_ed25519"]
+RUN ["chmod", "0600", "/home/kubot/.ssh/id_ed25519.pub"]
+RUN ["chmod", "0600", "/home/kubot/.ssh/known_hosts"]
 
 RUN ["chown", "-R", "kubot", "/home/kubot"]
 
